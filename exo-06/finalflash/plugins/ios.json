@@ -12,6 +12,9 @@
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.vegeta.dbz.cordova"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.vegeta.dbz.cordova"
         }
     },
     "dependent_plugins": {}
