@@ -37,7 +37,14 @@ var app = {
         var receivedElement = parentElement.querySelector('.received');
         
         var deviceVesion = document.getElementById('device');
-        deviceVesion.innerHTML = device.version
+        deviceVesion.innerHTML = '<ul data-role="listview" id="list"'+
+        '<li data-icon="arrow-l">Name:' + device.manufacturer + '</li>'+
+        '<li data-icon="arrow-r">Model:' + device.model + '</li>'+
+        '<li data-icon="arrow-r">Cordova:' + device.cordova + '</li>'+
+        '<li data-icon="arrow-l">Platform:' + device.platform + '</li>'+
+        '<li data-icon="arrow-r">Uuid:' + device.uuid + '</li>'+
+        '<li data-icon="arrow-l">Version:' + device.version + '</li>'+
+        '</ul>';
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
