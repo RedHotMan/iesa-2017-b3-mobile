@@ -28,9 +28,6 @@ initialize: function() {
     // 'pause', 'resume', etc.
 onDeviceReady: function() {
     this.receivedEvent('deviceready');
-    
-    
-    
     function checkConnection() {
         var networkState = navigator.connection.type;
         
@@ -56,8 +53,6 @@ onDeviceReady: function() {
      navigator.app.exitApp();
      
      window.setItem
-     
-     
      }*/
     var myContact = navigator.contacts.create({"displayName": "Bejita"});
     myContact.save;
@@ -79,10 +74,39 @@ onDeviceReady: function() {
     options.multiple = true;
     var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
     navigator.contacts.find(fields, onSuccess, onError, options);
-  
     
+    function setOptions(srcType) {
+        var options = {
+            // Some common settings are 20, 50, and 100
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+            // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: true,
+        correctOrientation: true  //Corrects Android orientation quirks
+        }
+        return options;
+    }
     
-
+    function openFilePicker() {
+        
+        var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+        var options = setOptions(srcType);
+        //var func = createNewFileEntry;
+        
+        navigator.camera.getPicture(function cameraSuccess(imageUri) {
+                                    
+                                    alert("Voila c'est fait");
+                                    
+                                    }, function cameraError(error) {
+                                    console.debug("Unable to obtain picture: " + error, "app");
+                                    
+                                    }, options);
+    }
+    
+    openFilePicker();
 },
     
     // Update DOM on a Received Event
@@ -91,7 +115,7 @@ receivedEvent: function(id) {
     var listeningElement = parentElement.querySelector('.listening');
     var receivedElement = parentElement.querySelector('.received');
     
-    /*var deviceVesion = document.getElementById('device');
+    var deviceVesion = document.getElementById('device');
     deviceVesion.innerHTML = '<ul data-role="listview" id="list"'+
     '<li data-icon="arrow-l">Name:' + device.manufacturer + '</li>'+
     '<li data-icon="arrow-r">Model:' + device.model + '</li>'+
@@ -99,13 +123,13 @@ receivedEvent: function(id) {
     '<li data-icon="arrow-l">Platform:' + device.platform + '</li>'+
     '<li data-icon="arrow-r">Uuid:' + device.uuid + '</li>'+
     '<li data-icon="arrow-l">Version:' + device.version + '</li>'+
-    '</ul>';*/
+    '</ul>';
     
     listeningElement.setAttribute('style', 'display:none;');
     receivedElement.setAttribute('style', 'display:block;');
     
     console.log('Received Event: ' + id);
-}
+},
 };
 
 app.initialize();

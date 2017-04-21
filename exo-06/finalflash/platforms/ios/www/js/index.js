@@ -28,9 +28,6 @@ initialize: function() {
     // 'pause', 'resume', etc.
 onDeviceReady: function() {
     this.receivedEvent('deviceready');
-    
-    
-    
     function checkConnection() {
         var networkState = navigator.connection.type;
         
@@ -56,10 +53,8 @@ onDeviceReady: function() {
      navigator.app.exitApp();
      
      window.setItem
-     
-     
      }*/
-    var myContact = navigator.contacts.create({"displayName": "Bejita LOL"});
+    var myContact = navigator.contacts.create({"displayName": "Bejita"});
     myContact.save;
     
     function onSuccess(contacts) {
@@ -79,10 +74,39 @@ onDeviceReady: function() {
     options.multiple = true;
     var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
     navigator.contacts.find(fields, onSuccess, onError, options);
-  
     
+    function setOptions(srcType) {
+        var options = {
+            // Some common settings are 20, 50, and 100
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+            // In this app, dynamically set the picture source, Camera or photo gallery
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: true,
+        correctOrientation: true  //Corrects Android orientation quirks
+        }
+        return options;
+    }
     
-
+    function openFilePicker(selection) {
+        
+        var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+        var options = setOptions(srcType);
+        //var func = createNewFileEntry;
+        
+        navigator.camera.getPicture(function cameraSuccess(imageUri) {
+                                    
+                                    alert("Voila c'est fait");
+                                    
+                                    }, function cameraError(error) {
+                                    console.debug("Unable to obtain picture: " + error, "app");
+                                    
+                                    }, options);
+    }
+    
+    openFilePicker();
 },
     
     // Update DOM on a Received Event
@@ -105,7 +129,7 @@ receivedEvent: function(id) {
     receivedElement.setAttribute('style', 'display:block;');
     
     console.log('Received Event: ' + id);
-}
+},
 };
 
 app.initialize();
