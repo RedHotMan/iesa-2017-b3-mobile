@@ -21,6 +21,9 @@
     <feature name="NetworkStatus">
         <param name="ios-package" value="CDVConnection" />
     </feature>
+    <feature name="Contacts">
+        <param name="ios-package" value="CDVContacts" />
+    </feature>
     <name>Final Flash</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
